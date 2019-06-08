@@ -1,0 +1,59 @@
+﻿@model MVCApplication.Models.FeedViewModel
+@using PagedList.Mvc
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Источник ленты
+                </th>
+                <th>
+                    Название новости
+                </th>
+                <th>
+                    Описание новости
+                </th>
+                <th>
+                    Дата публикации
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var feed in Model.Feeds)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => feed.RSSSource.Name)</td>
+                    <td>@Html.DisplayFor(model => feed.Name)</td>
+                    <td>@Html.DisplayFor(model => feed.Description)</td>
+                    <td>@Html.DisplayFor(model => feed.PublishDate)</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    @for (int i = 1; i <= Model.Feeds.PageCount; i++)
+                    {
+                        if (i == Model.Feeds.PageNumber)
+                        {
+                            @i
+                        }
+                        else
+                        {
+                            <a class="page-number" href="#">@i</a>
+                        }
+                    }
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+
+
+@*@Html.PagedListPager(Model.Feeds, page => Url.Action("GetFeedsTable", new
+{
+    page = page,
+    sortField = Model.SortField,
+    sourceId = Model.SourceId
+}),
+PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("tableData"))*@

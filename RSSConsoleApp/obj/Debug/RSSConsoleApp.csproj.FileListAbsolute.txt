@@ -1,0 +1,12 @@
+D:\C#\RSSReader\RSSConsoleApp\obj\Debug\RSSConsoleApp.csproj.CoreCompileInputs.cache
+D:\C#\RSSReader\RSSConsoleApp\bin\Debug\RSSConsoleApp.exe.config
+D:\C#\RSSReader\RSSConsoleApp\bin\Debug\RSSConsoleApp.exe
+D:\C#\RSSReader\RSSConsoleApp\bin\Debug\RSSConsoleApp.pdb
+D:\C#\RSSReader\RSSConsoleApp\obj\Debug\RSSConsoleApp.exe
+D:\C#\RSSReader\RSSConsoleApp\obj\Debug\RSSConsoleApp.pdb
+D:\C#\RSSReader\RSSConsoleApp\obj\Debug\RSSConsoleApp.csprojAssemblyReference.cache
+D:\C#\RSSReader\RSSConsoleApp\bin\Debug\EntityFramework.dll
+D:\C#\RSSReader\RSSConsoleApp\bin\Debug\EntityFramework.SqlServer.dll
+D:\C#\RSSReader\RSSConsoleApp\bin\Debug\EntityFramework.xml
+D:\C#\RSSReader\RSSConsoleApp\bin\Debug\EntityFramework.SqlServer.xml
+D:\C#\RSSReader\RSSConsoleApp\obj\Debug\RSSConsoleApp.csproj.CopyComplete

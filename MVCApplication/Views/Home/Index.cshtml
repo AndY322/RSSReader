@@ -1,0 +1,81 @@
+﻿@model MVCApplication.Models.FeedViewModel
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Новостная лента</h2>
+
+<body>
+    @using (Html.BeginForm("GetFeeds", "Home"))
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SourceId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.SourceId, ViewBag.sources as SelectList, "Все")
+                    @Html.ValidationMessageFor(model => model.SourceId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    Сортировать по дате
+                    @Html.RadioButtonFor(model => model.SortField, "Date")
+                    Сортировать по источнику
+                    @Html.RadioButtonFor(model => model.SortField, "Source")
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Просмореть" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                Источник ленты
+            </th>
+            <th>
+                Название новости
+            </th>
+            <th>
+                Описание новости
+            </th>
+            <th>
+                Дата публикации
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Feeds)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RSSSource.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublishDate)
+                </td>
+            </tr>
+        }
+    </table>
+    Страница @(Model.Feeds.PageCount < Model.Feeds.PageNumber ? 0 : 
+        Model.Feeds.PageNumber) из @Model.Feeds.PageCount
+
+        @Html.PagedListPager(Model.Feeds, page => Url.Action("Index", new {
+            page = page,
+            sortField = Model.SortField,
+            sourceId = Model.SourceId}))
+</body>
+
+

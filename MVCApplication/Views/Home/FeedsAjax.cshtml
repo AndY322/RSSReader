@@ -1,0 +1,73 @@
+﻿@model MVCApplication.Models.AjaxFeedViewModel
+
+@{
+    ViewBag.Title = "Новости";
+}
+<h2>Новостная лента</h2>
+
+<body>
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.SourceId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SourceId, ViewBag.sources as SelectList, "Все")
+                @Html.ValidationMessageFor(model => model.SourceId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                Сортировать по дате
+                @Html.RadioButtonFor(model => model.SortField, "Date")
+                Сортировать по источнику
+                @Html.RadioButtonFor(model => model.SortField, "Source")
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="showButton" type="submit" value="Просмореть" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div id="tableData">
+        @Html.Action("GetFeedsTable")
+    </div>
+</body>
+@section scripts
+{
+<script type="text/javascript">
+    $(document).on("click", ".page-number", function () {
+        let page = parseInt($(this).html());
+        let sourceId = document.querySelector("#SourceId");
+        let sortField = document.querySelector("#SortField");
+        $.ajax({
+            url: '@Url.Action("GetFeedsTable")',
+            data: {
+                "page": page,
+                sourceId: sourceId.value,
+                sortField: sortField.value
+            },
+            success: function (data) {
+                $("#tableData").html(data);
+            }
+        });
+    });
+    $(document).on("click", "#showButton", function () {
+        let sourceId = document.querySelector("#SourceId");
+        let sortField = document.querySelector("#SortField");
+        $.ajax({
+            url: '@Url.Action("GetFeedsTable")',
+            data: {
+                sourceId: sourceId.value,
+                sortField: sortField.value
+            },
+            success: function (data) {
+                $("#tableData").html(data);
+            }
+        });
+    });
+
+</script>
+}
+    
+    
